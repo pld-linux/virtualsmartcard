@@ -2,7 +2,7 @@ Summary:	Virtual Smart Card - smart card emulator written in Python
 Summary(pl.UTF-8):	Virtual Smart Card - emulator kart procesorowych napisany w Pythonie
 Name:		virtualsmartcard
 Version:	0.7
-Release:	2
+Release:	3
 License:	GPL v3+
 Group:		Applications/Emulators
 #Source0Download: https://github.com/frankmorgner/vsmartcard/releases
@@ -42,6 +42,7 @@ Virtual Smart Card - emulator kart procesorowych napisany w Pythonie.
 %{__autoheader}
 %{__automake}
 %configure \
+	--enable-serialdropdir=$(pkg-config --variable=usbdropdir libpcsclite) \
 	--disable-silent-rules
 %{__make}
 
@@ -61,7 +62,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog README
 %attr(755,root,root) %{_bindir}/vicc
 %attr(755,root,root) %{_bindir}/vpcd-config
-%attr(755,root,root) %{_libdir}/pcsc/drivers/serial/libifdvpcd.so*
+%attr(755,root,root) %{_libdir}/pcsc/drivers/libifdvpcd.so*
 %config(noreplace) %verify(not md5 mtime size) /etc/reader.conf.d/vpcd
 %{py_sitescriptdir}/virtualsmartcard
 %{_mandir}/man1/vicc.1*
