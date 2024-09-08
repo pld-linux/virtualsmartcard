@@ -1,13 +1,13 @@
 Summary:	Virtual Smart Card - smart card emulator written in Python
 Summary(pl.UTF-8):	Virtual Smart Card - emulator kart procesorowych napisany w Pythonie
 Name:		virtualsmartcard
-Version:	0.7
-Release:	3
+Version:	0.9
+Release:	1
 License:	GPL v3+
 Group:		Applications/Emulators
 #Source0Download: https://github.com/frankmorgner/vsmartcard/releases
 Source0:	https://github.com/frankmorgner/vsmartcard/releases/download/%{name}-%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	917119fbe74c0b0e331d3a84557c618a
+# Source0-md5:	c9a65519349a5be90de35a55ae8181b2
 Patch0:		%{name}-prefix.patch
 URL:		https://frankmorgner.github.io/vsmartcard/
 BuildRequires:	autoconf >= 2.64
@@ -17,7 +17,7 @@ BuildRequires:	help2man
 BuildRequires:	libtool
 BuildRequires:	pcsc-lite-devel
 BuildRequires:	pkgconfig
-BuildRequires:	python-devel >= 2
+BuildRequires:	python3-devel >= 1:3.2
 BuildRequires:	qrencode-devel
 BuildRequires:	rpm-pythonprov
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -42,6 +42,7 @@ Virtual Smart Card - emulator kart procesorowych napisany w Pythonie.
 %{__autoheader}
 %{__automake}
 %configure \
+	PYTHON=%{__python3} \
 	--enable-serialdropdir=$(pkg-config --variable=usbdropdir libpcsclite) \
 	--disable-silent-rules
 %{__make}
@@ -59,10 +60,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog README
+%doc doc/README.txt.in
 %attr(755,root,root) %{_bindir}/vicc
 %attr(755,root,root) %{_bindir}/vpcd-config
 %attr(755,root,root) %{_libdir}/pcsc/drivers/libifdvpcd.so*
 %config(noreplace) %verify(not md5 mtime size) /etc/reader.conf.d/vpcd
-%{py_sitescriptdir}/virtualsmartcard
+%{py3_sitescriptdir}/virtualsmartcard
 %{_mandir}/man1/vicc.1*

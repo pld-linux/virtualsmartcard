@@ -1,38 +1,20 @@
---- virtualsmartcard-0.7/configure.ac.orig	2014-09-07 14:50:04.000000000 +0200
-+++ virtualsmartcard-0.7/configure.ac	2017-11-27 21:15:15.252769974 +0100
-@@ -68,17 +68,10 @@
+--- virtualsmartcard-0.9/configure.ac.orig	2024-09-08 15:17:35.992591558 +0200
++++ virtualsmartcard-0.9/configure.ac	2024-09-08 15:22:52.677542595 +0200
+@@ -106,7 +106,7 @@ if test "${libpcsclite}" = no ; then
  		serial wrapper driver (default to pcscd config or $(prefix)/pcsc/drivers/serial)]),
  		[serialdropdir="${enableval}"], [serialdropdir=no])
  	if test "${serialdropdir}" = no ; then
 -		if test "${prefix}" = NONE ; then
++		if true ; then
  			serialdropdir="`$PKG_CONFIG libpcsclite --variable=usbdropdir`/serial"
  			if test "${serialdropdir}" = "/serial" ; then
- 				AC_MSG_ERROR([use --enable-serialdropdir=DIR])
- 			fi
--		else
--			serialdropdir="${prefix}`$PKG_CONFIG libpcsclite --variable=usbdropdir`/serial"
--			if test "${serialdropdir}" = "${prefix}/serial" ; then
--				AC_MSG_ERROR([use --enable-serialdropdir=DIR])
--			fi
--		fi
- 	fi
- 
- 
-@@ -88,17 +81,10 @@
+ 				case "$host" in
+@@ -152,7 +152,7 @@ if test "${libpcsclite}" = no ; then
  		serial wrapper driver (default to pcscd config or /etc/reader.conf.d)]),
  		[serialconfdir="${enableval}"], [serialconfdir=no])
  	if test "${serialconfdir}" = no ; then
 -		if test "${prefix}" = NONE ; then
++		if true ; then
  			serialconfdir="`$PKG_CONFIG libpcsclite --variable=serialconfdir`"
  			if test "${serialconfdir}" = "" ; then
- 				serialconfdir="/etc/reader.conf.d"
- 			fi
--		else
--			serialconfdir="${prefix}`$PKG_CONFIG libpcsclite --variable=serialconfdir`"
--			if test "${serialconfdir}" = "${prefix}" ; then
--				serialconfdir="${prefix}/etc/reader.conf.d"
--			fi
--		fi
- 	fi
- else
-     builddir="`pwd`"
+ 				case "$host" in
